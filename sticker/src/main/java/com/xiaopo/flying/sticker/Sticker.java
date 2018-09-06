@@ -36,6 +36,7 @@ public abstract class Sticker {
   private final Matrix matrix = new Matrix();
   private boolean isFlippedHorizontally;
   private boolean isFlippedVertically;
+  private boolean isLocked;
 
   public boolean isFlippedHorizontally() {
     return isFlippedHorizontally;
@@ -52,6 +53,15 @@ public abstract class Sticker {
 
   @NonNull public Sticker setFlippedVertically(boolean flippedVertically) {
     isFlippedVertically = flippedVertically;
+    return this;
+  }
+
+  public boolean isLocked() {
+    return isLocked;
+  }
+
+  @NonNull public Sticker setLocked(boolean locked) {
+    isLocked = locked;
     return this;
   }
 
@@ -232,6 +242,9 @@ public abstract class Sticker {
   }
 
   public boolean contains(@NonNull float[] point) {
+    if (isLocked()) {
+      return false;
+    }
     Matrix tempMatrix = new Matrix();
     tempMatrix.setRotate(-getCurrentAngle());
     getBoundPoints(boundPoints);

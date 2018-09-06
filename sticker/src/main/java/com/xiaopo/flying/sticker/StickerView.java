@@ -843,6 +843,10 @@ public class StickerView extends FrameLayout {
     return handlingSticker;
   }
 
+  public Sticker clearCurrentSticker() {
+    handlingSticker = null;
+  }
+
   @NonNull public List<BitmapStickerIcon> getIcons() {
     return icons;
   }
